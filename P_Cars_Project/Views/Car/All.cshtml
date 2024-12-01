@@ -1,0 +1,46 @@
+@model IEnumerable<P_Cars_Project.Data.Models.Car>
+
+@{
+    ViewData["Title"] = "All Cars";
+}
+
+<h2>All Cars</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Category</th>
+            <th>Booked</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@car.CarPhoto" alt="@car.Brand" style="width: 100px; height: auto;" />
+                </td>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.Category?.Name</td>
+                <td>@(car.IsBooked ? "Yes" : "No")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id" class="btn btn-danger btn-sm">Delete</a>  
+                    @if(car.IsBooked == false){
+                                <a asp-controller="Book" asp-action="Rent" asp-route-carId="@car.Id" asp-route-userId="@car.IdentityUser.Id" class="btn btn-primary btn-sm">Rent</a>
+                    }   
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Add New Car</a>

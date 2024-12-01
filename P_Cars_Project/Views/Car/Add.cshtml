@@ -1,0 +1,57 @@
+@model P_Cars_Project.Data.Models.Car
+
+@{
+    ViewData["Title"] = "Add Car";
+}
+
+<h2>Add Car</h2>
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Brand" class="control-label"></label>
+        <input asp-for="Brand" class="form-control" />
+        <span asp-validation-for="Brand" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Model" class="control-label"></label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CarPhoto" class="control-label"></label>
+        <input asp-for="CarPhoto" class="form-control" />
+        <span asp-validation-for="CarPhoto" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Year" class="control-label"></label>
+        <input asp-for="Year" type="number" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label"></label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdentityUserId" class="control-label"></label>
+        <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.Users"></select>
+        <span asp-validation-for="IdentityUserId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="IsBooked" class="form-check-input" />
+        <label asp-for="IsBooked" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Car</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
